@@ -5,6 +5,7 @@ class Producto
 private $nombre;
 private $cod_barra;  
 
+
 public function __construct($nombreParametro = NULL, $cod_barraParametro = NULL)
 {
     $this->nombre = $nombreParametro;
@@ -16,6 +17,7 @@ public function ToString() : strings
 {
     return $this->nombre + "--" + $this->cod_barra;
 }
+
 
 public static function Guardar (Producto $obj) : bool
 {
@@ -36,6 +38,10 @@ public static function Guardar (Producto $obj) : bool
 
     return $retorno;
 }
+
+
+
+
 
 }
 
