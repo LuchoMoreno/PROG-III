@@ -1,46 +1,73 @@
 <?php
 
+require "archivo.php";
+
 class Producto
 {
 private $nombre;
 private $cod_barra;  
+private $_path;
 
 
-public function __construct($nombreParametro = NULL, $cod_barraParametro = NULL)
-{
-    $this->nombre = $nombreParametro;
-    $this->cod_barra = $cod_barraParametro;
+public function __construct($nombre=null,$codbarra=null,$file=null){
+    if($nombre!=null && $codbarra!=null && $file!=null){
+       $this->_nombre=$nombre;
+       $this->_codbarra=$codbarra;
+       //$this->_path="./archivo/".$_FILES["archivo"]["name"];
+       $this->_path="./archivo/".$file;
+    }
 }
 
 
-public function ToString() : strings
-{
-    return $this->nombre + "--" + $this->cod_barra;
+public function toString(){
+
+    return $this->_codbarra ." -- ". $this->_nombre." -- " .$this->_path. "\r\n";
 }
 
 
-public static function Guardar (Producto $obj) : bool
-{
-    $retorno;
-    $abrir = fopen("producto.txt", "w+");
-    $escribir = fwrite($abrir, $obj->ToString());
+
+public static function Guardar($producto){
     
-    if ($escribir > 0)
+    $path= "./archivos/productos.txt";
+    Archivo::Subir();
+
+    $archivo=fopen($path,"a");
+
+    //$producto->file;
+
+    if(fwrite($archivo,$producto->toString()))
     {
-        echo "Se pudo escribir";
-        $retorno = true;
+        fclose($archivo);
+        return true;
     }
     else
     {
-        echo "Male sal";
-        $retorno = false;
+        return false;
     }
-
-    return $retorno;
 }
 
-
-
+public static function TraerTodoslosProductos(){
+    $productos= array();
+    //$producs= array();
+    $path= "archivos/productos.txt";
+    $archivo=fopen($path,"r");
+    while(!feof($archivo)){
+        $a=explode("-",fgets($archivo));
+        if(isset($a[1])){
+            array_push($productos,new Producto($a[0],$a[1],$a[2]));
+        }
+    }
+    fclose($archivo);
+   /* for ($i=0; $i <count($productos) ; $i++) { 
+        if(isset($productos[1])){
+            $prod= new Producto($productos[0],$productos[1],$productos[2]);
+            array_push($producs,$prod);
+        }else{
+            break;
+        }
+    }*/
+ return $productos;
+}
 
 
 }

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<form action="subir.php" method="post" enctype="multipart/form-data" >
+<form action="subirFoto.php" method="post" enctype="multipart/form-data" >
 
 <td>ARCHIVOS:</td>
 <td colspan="2" align="right">
