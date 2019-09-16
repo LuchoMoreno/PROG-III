@@ -19,28 +19,62 @@ switch($queHago){
 
         $rs = $con->query($sql);
 
-        
-        echo "<pre>";
-        var_dump($rs);
-        echo "</pre>";
-
+    
 
         while ($row = $rs->fetch_object())
         { 
             $user_arr[] = $row;
         }  
+
+        //INICIO TABLA
+        $table =    "<table border='1'>
+        <tr>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Apellido</td>
+            <td>Perfil</td>
+            <td>Estado</td>
+        </tr>";
+        //INICIO TABLA
+        
+
+        //DATOS 
+        if(mysqli_affected_rows($con)>0)
+        {
+            for ($i=0; $i <mysqli_affected_rows($con) ; $i++) 
+            { 
+                $table .=   "<tr>
+                                <td>".$user_arr[$i]->id."</td>
+                                <td>".$user_arr[$i]->nombre."</td>
+                                <td>".$user_arr[$i]->apellido."</td>
+                                <td>".$user_arr[$i]->perfil."</td>
+                                <td>".$user_arr[$i]->estado."</td>
+                            </tr>";
+            }
+        }else
+        {
+            $table.="<tr>
+                        <td align='center' colspan='5'>NO EXISTEN USUARIOS</td>
+                    </tr>"; 
+        }
+        //DATOS
+
+        //CIERRO TABLA
+        $table.="</table>";
+        //CIERRO TABLA
+
+        //MUESTRO LA TABLA POR ECHO
+        echo "<pre>";
+        echo($table);
+        echo "</pre>";
+
         echo "<pre>";
         var_dump($user_arr); 
         echo "</pre>";
 
+        //CIERRO CONEXION
+        mysqli_close($conection);
 
-        echo "<pre>
-        
-        Cantidad de filas: " . mysqli_num_rows($rs) . "<br>mysqli_num_rows(rs)</pre>";  
-        mysqli_close($con);
-        
-        echo "<pre>mysqli_close(con);</pre>";
-        
     break;
 
     case "TraerTodos_PorID":
