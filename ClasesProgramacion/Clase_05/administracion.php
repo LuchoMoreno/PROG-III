@@ -51,8 +51,6 @@ switch($queHago){
 
     $rs = $con->query($sql);
 
-    
-
     echo "<pre>";
     var_dump($rs);
     echo "</pre>";
@@ -77,29 +75,25 @@ break;
 case "TraerTodos_PorEstado":
 
 $con = @mysqli_connect($host, $user, $pass, $base2);
+    $estado = $_POST["estado"];
+    $sql = "SELECT `id`, `nombre`, `apellido`, `clave`, `perfil`, `estado` FROM `usuarios` WHERE `estado` =" . $estado;
 
-$sql = "SELECT `id`, `nombre`, `apellido`, `clave`, `perfil`, `estado` FROM `usuarios`";
+    $rs = $con->query($sql);
+    $user_arr = NULL;
 
-$rs = $con->query($sql);
+    while ($row = $rs->fetch_object())
+    { 
+        $user_arr[] = $row;
+    }  
+    
+    echo "<pre>";
+    var_dump($user_arr);         
+    echo "</pre>";
 
-echo "<pre>
-    con = mysqli_connect(host, user, pass, base); 
-    sql = 'SELECT * FROM usuarios';
-    rs = con->query(sql);
-</pre>";
 
-echo "<pre>";
-
-var_dump($rs);
-
-echo "</pre>";
-
-echo "<pre>Cantidad de filas: " . mysqli_num_rows($rs) . "<br>mysqli_num_rows(rs)</pre>";  
-
-mysqli_close($con);
-
-echo "<pre>mysqli_close(con);</pre>";
-
+    mysqli_close($con);
+    
+    
 break;
 
 

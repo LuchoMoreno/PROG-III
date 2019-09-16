@@ -16,7 +16,6 @@ namespace Main{
      
     export function EjecutarTraerPorID():void {
         var idObtenida : string = EjecutarObtenerID();
-
         let parametros:string = `queHago=TraerTodos_PorID&id=` + idObtenida;
 
         ajax.Post("administracion.php", 
@@ -31,12 +30,18 @@ namespace Main{
     } 
 
     export function EjecutarTraerPorEstado():void {
-        let parametros:string = `queHago=TraerTodos_PorEstado`;
+        var estadoObtenido : string = EjecutarObtenerEstado();
+        let parametros:string = `queHago=TraerTodos_PorEstado&estado=` + estadoObtenido;
 
         ajax.Post("administracion.php", 
                     Success, 
                     parametros, 
                     Fail);            
+    } 
+
+    export function EjecutarObtenerEstado():string {
+        var estadoObtenido : string = (<HTMLInputElement> document.getElementById("txtEstado")).value;
+        return estadoObtenido;        
     } 
     
     function Success(retorno:string):void {

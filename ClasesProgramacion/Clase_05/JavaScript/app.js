@@ -20,10 +20,16 @@ var Main;
     }
     Main.EjecutarObtenerID = EjecutarObtenerID;
     function EjecutarTraerPorEstado() {
-        var parametros = "queHago=TraerTodos_PorEstado";
+        var estadoObtenido = EjecutarObtenerEstado();
+        var parametros = "queHago=TraerTodos_PorEstado&estado=" + estadoObtenido;
         ajax.Post("administracion.php", Success, parametros, Fail);
     }
     Main.EjecutarTraerPorEstado = EjecutarTraerPorEstado;
+    function EjecutarObtenerEstado() {
+        var estadoObtenido = document.getElementById("txtEstado").value;
+        return estadoObtenido;
+    }
+    Main.EjecutarObtenerEstado = EjecutarObtenerEstado;
     function Success(retorno) {
         console.clear();
         console.log(retorno);
