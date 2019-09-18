@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<title>Ejemplos MYSQLI - PHP</title>
+	  
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link href="./img/utnLogo.png" rel="icon" type="image/png" />
+		
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/animacion.css">		
+		
+		<!-- Estilos propios -->
+		<link rel="stylesheet" type="text/css" href="css/estilo.css">
+
+		<script type="text/javascript" src="JavaScript/ajax.js"></script>
+		<script type="text/javascript" src="JavaScript/app.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h1>MYSQLI - PHP</h1>      
+		</div>
+		<div class="CajaInicio animated bounceInLeft">
+			<h1>MYSQLI</h1>
+			<a href="#" class="list-group-item list-group-item list-group-item-info">
+				
+				<h4 class="list-group-item-heading"> Funciones propias </h4>
+
+				<hr style="border-color:black;">
+
+				
+				<p class="list-group-item-text" onclick="Main.EjecutarTraerTodos()">Ejecutar trear todos</p>
+
+				<hr style="border-color:black;">
+
+				<p class="list-group-item-text" onclick="Main.EjecutarTraerPorID()">Ejecutar traer por ID</p>
+				<input type="text" id="txtID" placeholder="Ingrese el ID: " />
+
+				<hr style="border-color:black;">
+
+
+				<p class="list-group-item-text" onclick="Main.EjecutarTraerPorEstado()">Ejecutar trear por Estado</p>
+				<input type="text" id="txtEstado" placeholder="Ingrese el estado: " />
+
+				<hr style="border-color:black;">
+>
+
+			</a>
+			</div>		
+		<div id="divResulado" class="CajaInicio animated bounceInRight">
+		</div>
+	</div>
+</body>
+</html>
+
