@@ -192,7 +192,7 @@ switch ($queHago) {
 
         mysqli_close($con);
 
-        echo $cargado;
+        echo "Codigo generado: " + $cargado;
 
         break;
 
