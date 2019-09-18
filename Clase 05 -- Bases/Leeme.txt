@@ -1,3 +1,3 @@
 Base de datos 1:	Absolutamente nueva, sin ningun comando.
 Base de datos 2:	Base medianamente avanzada, ideal para empezar un parcial.
-Base de datos 3:	Base de datos practicamente terminada
+Base de datos 3:	Base de datos avanzada, se le suma la pagina para añadir usuarios.
