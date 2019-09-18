@@ -14,6 +14,8 @@ namespace Main{
                     Fail);            
     }    
      
+    //////////////////////////////////////////////////////
+
     export function EjecutarTraerPorID():void {
         var idObtenida : string = EjecutarObtenerID();
         let parametros:string = `queHago=TraerTodos_PorID&id=` + idObtenida;
@@ -29,6 +31,8 @@ namespace Main{
         return idObtenida;        
     } 
 
+    //////////////////////////////////////////////////////
+
     export function EjecutarTraerPorEstado():void {
         var estadoObtenido : string = EjecutarObtenerEstado();
         let parametros:string = `queHago=TraerTodos_PorEstado&estado=` + estadoObtenido;
@@ -43,6 +47,37 @@ namespace Main{
         var estadoObtenido : string = (<HTMLInputElement> document.getElementById("txtEstado")).value;
         return estadoObtenido;        
     } 
+    
+    //////////////////////////////////////////////////////
+
+
+    export function RedireccionarNuevoUsuario():void {
+    window.location.href = 'nuevoUsuario.html';   
+    }     
+
+
+    export function ObtenerTodosLosDatos():string {
+        var nombreObtenido : string = (<HTMLInputElement> document.getElementById("dataNombre")).value;
+        var apellidoObtenido : string = (<HTMLInputElement> document.getElementById("dataApellido")).value;
+        var claveObtenida : string = (<HTMLInputElement> document.getElementById("dataClave")).value;
+
+        var datosCompletos : string = "INSERT INTO `usuarios`(`nombre`, `apellido`, `clave`, `perfil`, `estado`) VALUES " + "("+nombreObtenido + "," + apellidoObtenido + "," + claveObtenida + "," + "1,1)";
+
+        return datosCompletos; 
+    } 
+
+
+    export function EjecutarCargarUsuario():void {
+        var usuaerio : string = ObtenerTodosLosDatos();
+        let parametros:string = `queHago=CargarNuevoUsuario`;
+
+        ajax.Post("administracion.php", 
+                    Success, 
+                    parametros, 
+                    Fail);            
+    } 
+
+    //////////////////////////////////////////////////////
     
     function Success(retorno:string):void {
         console.clear();

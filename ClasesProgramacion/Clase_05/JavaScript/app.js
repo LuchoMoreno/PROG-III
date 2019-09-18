@@ -8,6 +8,7 @@ var Main;
         ajax.Post("administracion.php", Success, parametros, Fail);
     }
     Main.EjecutarTraerTodos = EjecutarTraerTodos;
+    //////////////////////////////////////////////////////
     function EjecutarTraerPorID() {
         var idObtenida = EjecutarObtenerID();
         var parametros = "queHago=TraerTodos_PorID&id=" + idObtenida;
@@ -19,6 +20,7 @@ var Main;
         return idObtenida;
     }
     Main.EjecutarObtenerID = EjecutarObtenerID;
+    //////////////////////////////////////////////////////
     function EjecutarTraerPorEstado() {
         var estadoObtenido = EjecutarObtenerEstado();
         var parametros = "queHago=TraerTodos_PorEstado&estado=" + estadoObtenido;
@@ -30,6 +32,26 @@ var Main;
         return estadoObtenido;
     }
     Main.EjecutarObtenerEstado = EjecutarObtenerEstado;
+    //////////////////////////////////////////////////////
+    function RedireccionarNuevoUsuario() {
+        window.location.href = 'nuevoUsuario.html';
+    }
+    Main.RedireccionarNuevoUsuario = RedireccionarNuevoUsuario;
+    function ObtenerTodosLosDatos() {
+        var nombreObtenido = document.getElementById("dataNombre").value;
+        var apellidoObtenido = document.getElementById("dataApellido").value;
+        var claveObtenida = document.getElementById("dataClave").value;
+        var datosCompletos = "INSERT INTO `usuarios`(`nombre`, `apellido`, `clave`, `perfil`, `estado`) VALUES " + "(" + nombreObtenido + "," + apellidoObtenido + "," + claveObtenida + "," + "1,1)";
+        return datosCompletos;
+    }
+    Main.ObtenerTodosLosDatos = ObtenerTodosLosDatos;
+    function EjecutarCargarUsuario() {
+        var usuaerio = ObtenerTodosLosDatos();
+        var parametros = "queHago=CargarNuevoUsuario";
+        ajax.Post("administracion.php", Success, parametros, Fail);
+    }
+    Main.EjecutarCargarUsuario = EjecutarCargarUsuario;
+    //////////////////////////////////////////////////////
     function Success(retorno) {
         console.clear();
         console.log(retorno);
