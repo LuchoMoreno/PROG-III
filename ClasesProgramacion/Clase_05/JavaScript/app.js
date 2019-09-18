@@ -46,8 +46,8 @@ var Main;
     }
     Main.ObtenerTodosLosDatos = ObtenerTodosLosDatos;
     function EjecutarCargarUsuario() {
-        var usuaerio = ObtenerTodosLosDatos();
-        var parametros = "queHago=CargarNuevoUsuario";
+        var usuario = ObtenerTodosLosDatos();
+        var parametros = "queHago=CargarNuevoUsuario&cargar=" + usuario;
         ajax.Post("administracion.php", Success, parametros, Fail);
     }
     Main.EjecutarCargarUsuario = EjecutarCargarUsuario;

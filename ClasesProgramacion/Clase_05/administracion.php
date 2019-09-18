@@ -183,8 +183,9 @@ switch ($queHago) {
         break;
 
         case "CargarNuevoUsuario":
+        $cargado = $_POST["cargar"];
 
-        echo "lalala";
+        echo $cargado;
 
         break;
 

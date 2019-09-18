@@ -68,8 +68,8 @@ namespace Main{
 
 
     export function EjecutarCargarUsuario():void {
-        var usuaerio : string = ObtenerTodosLosDatos();
-        let parametros:string = `queHago=CargarNuevoUsuario`;
+        var usuario : string = ObtenerTodosLosDatos();
+        let parametros:string = `queHago=CargarNuevoUsuario&cargar=` + usuario;
 
         ajax.Post("administracion.php", 
                     Success, 
