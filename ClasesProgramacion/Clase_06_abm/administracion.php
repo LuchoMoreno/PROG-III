@@ -71,25 +71,23 @@ switch ($queHago) {
 
     case "TraerTodos_PorID":
 
-
         $conStr = 'mysql:host=localhost;dbname=cdcol;charset=utf8'; 
         $pdo = new PDO($conStr, $user, $pass);
         $id = $_POST["id"];
 
-        echo var_dump($_POST);
-
-        $sentencia = $pdo->prepare('SELECT id, nombre, apellido, clave, perfil, estado FROM usuarios WHERE id = :id');
-        $sentencia->bindParam(':id', $id);
+        $sentencia = $pdo->prepare("SELECT id, nombre, apellido, clave, perfil, estado FROM usuarios WHERE id =:id");
+        $sentencia->bindParam(":id", $id);
 
         $sentencia->execute();
 
-
-        while ($fila = $sentencia->fetch(PDO::FETCH_NUM)) 
-        {
-            $datos = $fila[0] . "\t" . $fila[1] . "\t" . $fila[2] . "\n";
-            echo $datos;
-        }
-
+        $tabla = "<table><tr><td>TITULO</td><td>INTERPRETE</td><td>AÑO</td></tr>";
+            while($fila = $sentencia->fetch()){
+                $tabla .= "<tr><td>{$fila[0]}</td><td>{$fila[1]}</td><td>{$fila['anio']}</td></tr>";
+            }
+            $tabla .= "</table>";
+            
+            echo $tabla;
+        
         break;
 
     case "TraerTodos_PorEstado":
