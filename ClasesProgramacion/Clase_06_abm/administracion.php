@@ -71,22 +71,28 @@ switch ($queHago) {
 
     case "TraerTodos_PorID":
 
-        $conStr = 'mysql:host=localhost;dbname=cdcol;charset=utf8'; 
-        $pdo = new PDO($conStr, $user, $pass);
-        $id = $_POST["id"];
-
-        $sentencia = $pdo->prepare("SELECT id, nombre, apellido, clave, perfil, estado FROM usuarios WHERE id =:id");
-        $sentencia->bindParam(":id", $id);
-
-        $sentencia->execute();
-
-        $tabla = "<table><tr><td>TITULO</td><td>INTERPRETE</td><td>AÑO</td></tr>";
-            while($fila = $sentencia->fetch()){
-                $tabla .= "<tr><td>{$fila[0]}</td><td>{$fila[1]}</td><td>{$fila['anio']}</td></tr>";
-            }
-            $tabla .= "</table>";
+            // $con = @mysqli_connect($host, $user, $pass, $base2);
+            $objetoPDO = new PDO('mysql:host=localhost;dbname=mercado;charset=utf8', $user, $pass);
             
-            echo $tabla;
+             $id = $_POST["id"];
+             
+             //$sql = "SELECT `id`, `nombre`, `apellido`, `clave`, `perfil`, `estado` FROM `usuarios` WHERE `id` =" . $id;
+             $sql = $objetoPDO->prepare("SELECT id, nombre, apellido, clave, perfil,estado FROM usuarios WHERE id= :id");
+             
+             $sql->bindParam(':id',$id);
+            
+             $sql->execute();
+            
+             //$rs = $con->query($sql);
+             //var_dump($sentencia->fetch());
+             
+             $tabla = "<table><tr><td>ID</td><td>NOMBRE</td><td>APELLIDO</td><td>CLAVE</td><td>PERFIL</td><td>ESTADO</td></tr>";
+             while($fila = $sql->fetch()){
+                 $tabla .= "<tr><td>{$fila[0]}</td><td>{$fila[1]}</td><td>{$fila[2]}</td><td>{$fila[3]}</td><td>{$fila[4]}</td><td>{$fila[5]}</td></tr>";
+             }
+             $tabla .= "</table>";
+             
+             echo $tabla;
         
         break;
 
