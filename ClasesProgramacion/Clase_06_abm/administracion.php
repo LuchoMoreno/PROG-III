@@ -13,59 +13,43 @@ switch ($queHago) {
 
     case "TraerTodos_Usuarios":
 
-        $con = @mysqli_connect($host, $user, $pass, $base2);
 
-        $sql = "SELECT `id`, `nombre`, `apellido`, `clave`, `perfil`, `estado` FROM `usuarios`";
+            $objetoPDO = new PDO('mysql:host=localhost;dbname=mercado;charset=utf8', $user, $pass);
 
-        $rs = $con->query($sql);
-
-
-        while ($row = $rs->fetch_object()) {
-            $user_arr[] = $row;
-        }
-
-        //INICIO TABLA
-        $table =    "<table border='1'>
-        <tr>
-            <td>ID</td>
-            <td>Nombre</td>
-            <td>Apellido</td>
-            <td>Perfil</td>
-            <td>Estado</td>
-        </tr>";
-        //INICIO TABLA
+            $sql = $objetoPDO->prepare("SELECT id, nombre, apellido, clave, perfil,estado FROM usuarios");
+            
+            $sql->execute();
 
 
-        //DATOS 
-        if (mysqli_affected_rows($con) > 0) {
-            for ($i = 0; $i < mysqli_affected_rows($con); $i++) {
+            $tabla .= "</table>";
+                
+            $table =    "<table border='1'>
+            <tr>
+                <td>ID</td>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Perfil</td>
+                <td>Estado</td>
+            </tr>";
+
+            while($fila = $sql->fetch()){
+
                 $table .=   "<tr>
-                                <td>" . $user_arr[$i]->id . "</td>
-                                <td>" . $user_arr[$i]->nombre . "</td>
-                                <td>" . $user_arr[$i]->apellido . "</td>
-                                <td>" . $user_arr[$i]->perfil . "</td>
-                                <td>" . $user_arr[$i]->estado . "</td>
-                            </tr>";
+                                    <td>{$fila[0]}</td>
+                                    <td>{$fila[1]}</td>
+                                    <td>{$fila[2]}</td>
+                                    <td>{$fila[3]}</td>
+                                    <td>{$fila[4]}</td>
+                                </tr>";
             }
-        } else {
-            $table .= "<tr>
-                        <td align='center' colspan='5'>NO EXISTEN USUARIOS</td>
-                    </tr>";
-        }
-        //DATOS
-
-        //CIERRO TABLA
-        $table .= "</table>";
-        //CIERRO TABLA
-
-        //MUESTRO LA TABLA POR ECHO
-        echo "<pre>";
-        echo ($table);
-        echo "</pre>";
 
 
-        //CIERRO CONEXION
-        mysqli_close($con);
+            $table .= "</table>";
+
+
+            echo "<pre>";
+            echo ($table);
+            echo "</pre>";
 
         break;
 
@@ -85,64 +69,80 @@ switch ($queHago) {
             
              //$rs = $con->query($sql);
              //var_dump($sentencia->fetch());
-             
-             $tabla = "<table><tr><td>ID</td><td>NOMBRE</td><td>APELLIDO</td><td>CLAVE</td><td>PERFIL</td><td>ESTADO</td></tr>";
-             while($fila = $sql->fetch()){
-                 $tabla .= "<tr><td>{$fila[0]}</td><td>{$fila[1]}</td><td>{$fila[2]}</td><td>{$fila[3]}</td><td>{$fila[4]}</td><td>{$fila[5]}</td></tr>";
-             }
-             $tabla .= "</table>";
-             
-             echo $tabla;
-        
+
+
+            $tabla .= "</table>";
+                
+            $table =    "<table border='1'>
+            <tr>
+                <td>ID</td>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Perfil</td>
+                <td>Estado</td>
+            </tr>";
+
+            while($fila = $sql->fetch()){
+
+                $table .=   "<tr>
+                                    <td>{$fila[0]}</td>
+                                    <td>{$fila[1]}</td>
+                                    <td>{$fila[2]}</td>
+                                    <td>{$fila[3]}</td>
+                                    <td>{$fila[4]}</td>
+                                </tr>";
+            }
+
+
+            $table .= "</table>";
+
+            echo "<pre>";
+            echo ($table);
+            echo "</pre>";
+               
         break;
 
     case "TraerTodos_PorEstado":
 
-        $con = @mysqli_connect($host, $user, $pass, $base2);
-        $estado = $_POST["estado"];
-        $sql = "SELECT `id`, `nombre`, `apellido`, `clave`, `perfil`, `estado` FROM `usuarios` WHERE `estado` =" . $estado;
 
-        $rs = $con->query($sql);
-        $user_arr = NULL;
-
-        while ($row = $rs->fetch_object()) {
-            $user_arr[] = $row;
-        }
-
-
-        $table =    "<table border='1'>
-        <tr>
-            <td>ID</td>
-            <td>Nombre</td>
-            <td>Apellido</td>
-            <td>Perfil</td>
-            <td>Estado</td>
-        </tr>";
-
-        if (mysqli_affected_rows($con) > 0) {
-            for ($i = 0; $i < mysqli_affected_rows($con); $i++) {
-                $table .=   "<tr>
-                        <td>" . $user_arr[$i]->id . "</td>
-                        <td>" . $user_arr[$i]->nombre . "</td>
-                        <td>" . $user_arr[$i]->apellido . "</td>
-                        <td>" . $user_arr[$i]->perfil . "</td>
-                        <td>" . $user_arr[$i]->estado . "</td>
-                    </tr>";
-            }
-        } else {
-            $table .= "<tr>
-                <td align='center' colspan='5'>NO EXISTEN USUARIOS</td>
+            $objetoPDO = new PDO('mysql:host=localhost;dbname=mercado;charset=utf8', $user, $pass);
+                
+            $estado = $_POST["estado"];
+            
+            $sql = $objetoPDO->prepare("SELECT id, nombre, apellido, clave, perfil,estado FROM usuarios WHERE estado= :estado");
+            
+            $sql->bindParam(':estado',$estado);
+        
+            $sql->execute();
+        
+            $tabla .= "</table>";
+                
+            $table =    "<table border='1'>
+            <tr>
+                <td>ID</td>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Perfil</td>
+                <td>Estado</td>
             </tr>";
-        }
 
-        $table .= "</table>";
+            while($fila = $sql->fetch()){
+
+                $table .=   "<tr>
+                                    <td>{$fila[0]}</td>
+                                    <td>{$fila[1]}</td>
+                                    <td>{$fila[2]}</td>
+                                    <td>{$fila[3]}</td>
+                                    <td>{$fila[4]}</td>
+                                </tr>";
+            }
 
 
-        echo "<pre>";
-        echo ($table);
-        echo "</pre>";
+            $table .= "</table>";
 
-        mysqli_close($con);
+            echo "<pre>";
+            echo ($table);
+            echo "</pre>";
 
 
         break;
@@ -150,14 +150,11 @@ switch ($queHago) {
         case "CargarNuevoUsuario":
         $cargado = $_POST["cargar"];
 
-        $con = @mysqli_connect($host, $user, $pass, $base2);
-        $sql = $cargado;
+        $objetoPDO = new PDO('mysql:host=localhost;dbname=mercado;charset=utf8', $user, $pass);
+       
+        $sql = $objetoPDO->prepare($cargado);
 
-        $rs = $con->query($sql);
-
-        echo "Codigo generado: " + $cargado;
-
-        mysqli_close($con);
+        $sql->execute();
 
 
         break;
@@ -166,12 +163,13 @@ switch ($queHago) {
         case "EliminarUsuario":
         $idEliminada = $_POST["idEliminar"];
 
-        $con = @mysqli_connect($host, $user, $pass, $base2);
-        $sql = "DELETE FROM `usuarios` WHERE `id` =" . $idEliminada;
+        $objetoPDO = new PDO('mysql:host=localhost;dbname=mercado;charset=utf8', $user, $pass);
+        
+        $ejecutar = "DELETE FROM `usuarios` WHERE `id` =" . $idEliminada;
 
-        $rs = $con->query($sql);
+        $sql = $objetoPDO->prepare($ejecutar);
 
-        mysqli_close($con);
+        $sql->execute();
 
        break;
 
@@ -179,14 +177,11 @@ switch ($queHago) {
        case "ModificarUsuario":
         $usuarioModificado = $_POST["cargarModificacion"];
 
-        $con = @mysqli_connect($host, $user, $pass, $base2);
-        $sql = $usuarioModificado;
+        $objetoPDO = new PDO('mysql:host=localhost;dbname=mercado;charset=utf8', $user, $pass);
 
-        $rs = $con->query($sql);
+        $sql = $objetoPDO->prepare($usuarioModificado);
 
-        echo "Codigo generado: " + $usuarioModificado;
-
-        mysqli_close($con);
+        $sql->execute();
 
        break;
 
