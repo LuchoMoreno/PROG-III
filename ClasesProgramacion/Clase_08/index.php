@@ -63,15 +63,18 @@ $app->group('/json', function ()
 {
     $this->post('/', function (Request $request, Response $response) {    
     var_dump($request->getParsedBody());
+    var_dump($request->getUploadedFiles());
 
     $fotoArray = $request->getUploadedFiles();
     $destino="./fotos/";
 
-    $nombreAnterior=$fotoArray['foto']->getClientFilename();
-    $extension= explode(".", $nombreAnterior)  ;
-    $extension=array_reverse($extension);
-    $fotoArray['foto']->moveTo($destino.$titulo.".".$extension[0]);
+    $nombre=$fotoArray['foto']->getClientFilename();
 
+    $extension= explode(".", $nombre);
+
+    $fotoArray['foto']->moveTo ($destino . $extension[0] . "." . $extension[1]);
+
+ 
     });
 
 
