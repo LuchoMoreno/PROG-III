@@ -56,13 +56,13 @@ $app->delete('[/]', function (Request $request, Response $response) {
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
-// 1) --- Hacer un middleware de aplicacion que tome usuario y contrase�a y verifique en BD.
+// 1) --- Hacer un middleware de aplicacion que tome usuario y contraseña y verifique en BD.
 
-// 2) --- Hacer middleware de grupo, solo para post, que permita agregar un nuevo usuario, si el perfil es �admin�.
+// 2) --- Hacer middleware de grupo, solo para post, que permita agregar un nuevo usuario, si el perfil es -- admin.
 
-// 3) --- Hacer middleware de grupo, solo para delete, que permita borrar un usuario, si el perfil es �super_admin�.
+// 3) --- Hacer middleware de grupo, solo para delete, que permita borrar un usuario, si el perfil es -- super_admin.
 
-// 4) --- Hacer middleware de ruta, solo para put y get, que tome el tiempo de demora entre que entra y sale la petici�n.
+// 4) --- Hacer middleware de ruta, solo para put y get, que tome el tiempo de demora entre que entra y sale la peticion.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -101,6 +101,9 @@ $app->group('/grupoEjercicios', function ()
 
 
 
+    // url: http://localhost/Clase_09_PPT/grupoEjercicios/tres
+    // key: usuario         value: {"nombre":"Nuevo","apellido":"Usuario","correo":"prueba@live.com","clave":"1234","perfil":"2","estado":"1", "foto":"NULL"}
+    // body -> x-www-form-urlencoded.
 
     $this->post('/tres', function (Request $request, Response $response) {    
         $response->getBody()->write("<br> POST => SlimFramework - Felicidades. Entraste al SLIM pasando por el middleware!!");
@@ -108,6 +111,9 @@ $app->group('/grupoEjercicios', function ()
         return $response;
 
     })->add(\Ejercicios :: class . ':EliminarUnUsuario');
+
+
+
 
 
 });

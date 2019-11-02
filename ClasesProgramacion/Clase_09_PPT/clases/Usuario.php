@@ -91,37 +91,20 @@ class Usuario
 
 
 
-/*
-    public static function EliminarCD($cd)
+
+    public static function EliminarUsuario($usuario)
     {
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         
-        $consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM cds WHERE id = :id");
+        $consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM usuarios WHERE id = :id");
         
-        $consulta->bindValue(':id', $cd->id, PDO::PARAM_INT);
+        $consulta->bindValue(':id', $usuario->id, PDO::PARAM_INT);
 
         return $consulta->execute();
 
     }
 
-    public static function ModificarUsuario($id, $nombre, $apellido, $corre,$clave, $estado, $perfil)
-    {
-
-        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        
-        $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET nombre = :nombre, apellido = :cantante,jahr = :anio WHERE id = :id");
-        
-        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
-        $consulta->bindValue(':titulo', $titulo, PDO::PARAM_INT);
-        $consulta->bindValue(':anio', $anio, PDO::PARAM_INT);
-        $consulta->bindValue(':cantante', $cantante, PDO::PARAM_STR);
-
-        return $consulta->execute();
-
-    }
-
-    */
 
 
 }

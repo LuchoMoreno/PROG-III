@@ -92,6 +92,42 @@ class Ejercicios{
         }
 
 
+// EJERCICIO 3.
+
+        public function EliminarUnUsuario($request, $response, $next) 
+                {
+
+                    if ($request->isPost())
+                    {
+                        $array = $request->getParsedBody();
+                        $JSONRecibido = json_decode($array['usuario']);
+
+                        $usuario = new Usuario();
+
+                        $usuario->nombre = $JSONRecibido->nombre;
+                        $usuario->apellido = $JSONRecibido->apellido;
+                        $usuario->clave = $JSONRecibido->clave;
+                        $usuario->correo = $JSONRecibido->correo;
+                        $usuario->perfil = $JSONRecibido->perfil;
+                        $usuario->estado = $JSONRecibido->estado;
+                        $usuario->foto = NULL;
+
+                        if ($usuario->perfil == 2)
+                        {
+                            echo $usuario->EliminarUsuario($usuario);  
+                            $response = $next($request, $response); 
+                            echo "<br> El usuario se elimino porque es SUPER-ADMIN. <br>";
+                        }
+                        else
+                        {
+                            echo "El usuario no se elimino. Es usuario comun / administrador.";
+                        }
+                        
+                        
+                    }
+                    return $response;
+                }
+
 
 
 }
