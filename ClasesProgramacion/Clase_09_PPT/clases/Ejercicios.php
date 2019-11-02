@@ -61,8 +61,32 @@ class Ejercicios{
 
             if ($request->isPost())
             {
-               
+                $array = $request->getParsedBody();
+                $JSONRecibido = json_decode($array['usuario']);
 
+                $usuario = new Usuario();
+
+                $usuario->nombre = $JSONRecibido->nombre;
+                $usuario->apellido = $JSONRecibido->apellido;
+                $usuario->clave = $JSONRecibido->clave;
+                $usuario->correo = $JSONRecibido->correo;
+                $usuario->perfil = $JSONRecibido->perfil;
+                $usuario->estado = $JSONRecibido->estado;
+                $usuario->foto = NULL;
+
+                if ($usuario->perfil == 1)
+                {
+                    echo $usuario->InsertarUsuario();  
+                    $response = $next($request, $response); 
+                    echo "<br> El usuario se agrego porque SI es administrador. <br>";
+                }
+                else
+                {
+                    echo "El usuario no se puede agregar porque no es administrador.";
+                }
+                
+                
+    
             }
             return $response;
         }

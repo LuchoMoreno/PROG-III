@@ -82,18 +82,35 @@ $app->post('/ejercicios/Uno', function (Request $request, Response $response) {
 
 
 
+
 $app->group('/grupoEjercicios', function () 
 {
+
+
+    // url: http://localhost/Clase_09_PPT/grupoEjercicios/dos
+    // key: usuario         value: {"nombre":"Nuevo","apellido":"Usuario","correo":"prueba@live.com","clave":"1234","perfil":"1","estado":"1", "foto":"NULL"}
+    // body -> x-www-form-urlencoded.
+
     $this->post('/dos', function (Request $request, Response $response) {    
         $response->getBody()->write("<br> POST => SlimFramework - Felicidades. Entraste al SLIM pasando por el middleware!!");
 
         return $response;
 
-    });
+    })->add(\Ejercicios :: class . ':AgregarUnUsuario');
 
 
 
-})->add(\Verificadora :: class . ':Verificar');
+
+
+    $this->post('/tres', function (Request $request, Response $response) {    
+        $response->getBody()->write("<br> POST => SlimFramework - Felicidades. Entraste al SLIM pasando por el middleware!!");
+
+        return $response;
+
+    })->add(\Ejercicios :: class . ':EliminarUnUsuario');
+
+
+});
 
 
 
