@@ -1,0 +1,7 @@
+1) --- Hacer un middleware de aplicacion que tome usuario y contrase�a y verifique en BD.
+
+2) --- Hacer middleware de grupo, solo para post, que permita agregar un nuevo usuario, si el perfil es �admin�.
+
+3) --- Hacer middleware de grupo, solo para delete, que permita borrar un usuario, si el perfil es �super_admin�.
+
+4) --- Hacer middleware de ruta, solo para put y get, que tome el tiempo de demora entre que entra y sale la petici�n.
