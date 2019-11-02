@@ -8,6 +8,7 @@ class Ejercicios{
 
         public function VerificarBaseDeDatos($request, $response, $next) 
         {
+
             // METODO POST.
             if ($request->isPost())
             {
@@ -16,13 +17,13 @@ class Ejercicios{
                 $JSONRecibido = json_decode($array['usuario']);
 
                 $usuario = new Usuario();
+
                 $clase = new stdClass();
 
                 $clase = $usuario->ExisteEnBD($JSONRecibido->correo,$JSONRecibido->clave);
 
 
                 // ESTA LINEA SE GENERA SI EL USUARIO EXISTE EN LA BASE DE DATOS.
-
                 if($clase->existe == true)
                 {
 
@@ -48,18 +49,25 @@ class Ejercicios{
 
             }
             
-            // METODO GET.
-            if ($request->isGet())
-            {
-                $response->getBody()->write("DESDE MIDDLEWARE - GET // "); 
-                $response = $next($request, $response); 
-            }
-
             return $response;
         }
 
 
+
 // EJERCICIO 2.
+
+        public function AgregarUnUsuario($request, $response, $next) 
+        {
+
+            if ($request->isPost())
+            {
+               
+
+            }
+            return $response;
+        }
+
+
 
 
 }

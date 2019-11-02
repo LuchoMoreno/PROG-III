@@ -56,17 +56,44 @@ $app->delete('[/]', function (Request $request, Response $response) {
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
+// 1) --- Hacer un middleware de aplicacion que tome usuario y contrase�a y verifique en BD.
+
+// 2) --- Hacer middleware de grupo, solo para post, que permita agregar un nuevo usuario, si el perfil es �admin�.
+
+// 3) --- Hacer middleware de grupo, solo para delete, que permita borrar un usuario, si el perfil es �super_admin�.
+
+// 4) --- Hacer middleware de ruta, solo para put y get, que tome el tiempo de demora entre que entra y sale la petici�n.
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
 
 // PARA PROBAR ESTE EJERCICIO, ESCRIBIR EN POSTMAN:
+// url: http://localhost/Clase_09_PPT/ejercicios/Uno
 // key: usuario         value: {"nombre":"Luciano","correo":"lucho.moreno@live.com","clave":"7319","perfil":"1"}
 // body -> x-www-form-urlencoded.
 
 $app->post('/ejercicios/Uno', function (Request $request, Response $response) {    
-    $response->getBody()->write("<br> GET => SlimFramework ->> Felicidades. Entraste al SLIM pasando por el middleware!!");
+    $response->getBody()->write("<br> POST => SlimFramework - Felicidades. Entraste al SLIM pasando por el middleware!!");
     return $response;
 
 })->add(\Ejercicios :: class . ':VerificarBaseDeDatos');
 
+
+
+
+$app->group('/grupoEjercicios', function () 
+{
+    $this->post('/dos', function (Request $request, Response $response) {    
+        $response->getBody()->write("<br> POST => SlimFramework - Felicidades. Entraste al SLIM pasando por el middleware!!");
+
+        return $response;
+
+    });
+
+
+
+})->add(\Verificadora :: class . ':Verificar');
 
 
 
